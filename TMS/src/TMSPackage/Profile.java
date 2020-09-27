@@ -4,7 +4,9 @@
 package TMSPackage;
 
 /**
- * @author gdeub
+ * @author Graham Deubner, Sandeep Alankar
+ * This class represents a profile for an account holder. It stores a first and last name.
+ * It contains getters for both names.
  *
  */
 public class Profile {

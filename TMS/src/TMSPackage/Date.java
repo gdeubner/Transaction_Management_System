@@ -7,6 +7,10 @@ import java.text.DecimalFormat;
 
 /**
  * @author Graham Deubner, Sandeep Alankar
+ * This class represents a date, used to record when an account was opened.
+ * The format of the date is mm/dd/yyyy.
+ * It implements the comparable interface so that date objects may be compared,
+ * and an isVald method that decides if the date object contains a possible date.
  *
  */
 public class Date implements Comparable<Date>{
@@ -25,7 +29,7 @@ public class Date implements Comparable<Date>{
         this.year = year;
         this.month = month;
         this.day = day;
-    }
+    } 
     
     /**
      *Method which compares this Date object object to the Date Object passed as a parameter.
