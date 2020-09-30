@@ -10,9 +10,9 @@ package TMSPackage;
 public class MoneyMarket extends Account{
     private int withdrawals;
     
-    public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {
+    public MoneyMarket(Profile holder, double balance, Date dateOpen) {
         super(holder, balance, dateOpen);
-        this.withdrawals = withdrawals;
+        withdrawals = 0;
     }
 
     @Override
