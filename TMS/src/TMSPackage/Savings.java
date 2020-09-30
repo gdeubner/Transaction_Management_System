@@ -7,12 +7,12 @@ package TMSPackage;
  * @author gdeub
  *
  */
-public class Checking extends Account{
-    private boolean directDeposit;
+public class Savings extends Account{
+    private boolean isLoyal;
     
-    public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
+    public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
         super(holder, balance, dateOpen);
-        this.directDeposit = directDeposit;
+        this.isLoyal = isLoyal;
     }
 
     @Override
