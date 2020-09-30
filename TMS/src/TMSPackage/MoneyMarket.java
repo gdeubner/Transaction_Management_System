@@ -7,12 +7,12 @@ package TMSPackage;
  * @author gdeub
  *
  */
-public class Checking extends Account{
-    private boolean directDeposit;
+public class MoneyMarket extends Account{
+    private int withdrawals;
     
-    public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
+    public MoneyMarket(Profile holder, double balance, Date dateOpen, int withdrawals) {
         super(holder, balance, dateOpen);
-        this.directDeposit = directDeposit;
+        this.withdrawals = withdrawals;
     }
 
     @Override
