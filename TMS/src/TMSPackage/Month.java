@@ -1,6 +1,6 @@
 
 /**
-* This is a constant class that contains public constant variable
+* This is a constant class that contains public constant variables
 * that are accessible in other classes to avoid use of magic numbers.
 * @author Sandeep Alankar, Graham Deubner
 *
