@@ -9,21 +9,36 @@ package TMSPackage;
  */
 public class MoneyMarket extends Account{
     private int withdrawals;
-    
+
+    /**
+     * 
+     * @param holder
+     * @param balance
+     * @param dateOpen
+     */
     public MoneyMarket(Profile holder, double balance, Date dateOpen) {
         super(holder, balance, dateOpen);
         withdrawals = 0;
     }
 
+    /**
+     * 
+     */
     @Override
     public double monthlyInterest() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 0.0065/Month.TOTALMONTHS;
     }
 
+    /**
+     * 
+     */
     @Override
     public double monthlyFee() {
-        // TODO Auto-generated method stub
-        return 0;
+        if (super.getBalance() >= 2500 && withdrawals <= 6) {
+            return 0;
+        }  
+        else {
+            return 12;
+        }
     }
 }
