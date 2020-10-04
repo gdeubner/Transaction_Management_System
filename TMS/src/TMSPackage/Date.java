@@ -62,12 +62,27 @@ public class Date implements Comparable<Date>{
      * @return returns true if the date object contains a real date, false otherwise.
      */
     public boolean isValid() {
-        int[] months = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int[] daysInEachMonth = {Month.JAN, Month.FEB, Month.MAR, Month.APR, Month.MAY, 
+                Month.JUN, Month.JUL, Month.AUG, Month.SEP, Month.OCT, Month.NOV, Month.DEC};
         if(day < 1 || month < 1 || year < 1)
             return false;
-        if(month>months.length)
+        if(month>daysInEachMonth.length)
             return false;
-        if(day>months[month])
+        if (month == Month.FEBRUARY) {// deals with leap years
+            int febDays = Month.FEB;
+            if (year % Month.QUADRENNIAL == 0) {
+                if (year % Month.CENTENNIAL == 0) {
+                    if (year % Month.QUADRACENTENNIAL == 0) {
+                        febDays++; //it's a leap year
+                    }
+
+                } else {
+                    febDays++;// it's a leap year
+                }
+            }
+            if (day > febDays)
+                return false;
+        } else if (day > daysInEachMonth[month])
             return false;
         return true;
     }
