@@ -55,6 +55,17 @@ public class Checking extends Account {
         }  
     }
 
+    /**
+     * toString method that calls toString method in superclass and adds account type and direct deposit
+     * if necessary.
+     * 
+     * @return String representation of account type, superclass toString, and direct deposit.
+     */
+    @Override
+    public String toString() {
+        return "*Checking*" + super.toString() + getSpecialString();
+    }
+
     /*
      * This method returns the necessary output string for a direct deposit account.
      * 
@@ -63,7 +74,7 @@ public class Checking extends Account {
     @Override
     public String getSpecialString() {
         if (directDeposit) {
-            return "direct deposit account";
+            return "*direct deposit account*";
         }
         else {
             return "";
