@@ -95,5 +95,7 @@ public abstract class Account {
     /**
      * Empty abstract method that is implemeneted in subclasses and returns appropriate strings.
      */
+
     public abstract String getSpecialString();       
+
 }

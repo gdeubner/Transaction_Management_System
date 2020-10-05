@@ -14,6 +14,14 @@ public class AccountDatabase {
     private int size;
 
 
+    
+    public AccountDatabase() {
+        int initialDBSize = 5;
+        size = 4;
+        accounts = new Account[initialDBSize];
+    }
+
+
     /**
      * Parameterized constructor that defines features of account database of Account objects.
      * 
@@ -38,19 +46,21 @@ public class AccountDatabase {
         boolean isMoneyMarket = account instanceof MoneyMarket;
 
         for (int i = 0; i < size; i++) {
-            boolean checkHolder = account.getHolder().equals(accounts[i].getHolder());
-            if ((checkHolder && (accounts[i] instanceof Checking == isChecking)) ||
-                    (checkHolder && (accounts[i] instanceof Savings == isSavings)) ||
-                    (checkHolder && (accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
-                return i;
+            if (accounts[i] != null) {
+                boolean checkHolder = account.getHolder().equals(accounts[i].getHolder());
+                if ((checkHolder && (accounts[i] instanceof Checking == isChecking))
+                        || (checkHolder && (accounts[i] instanceof Savings == isSavings))
+                        || (checkHolder && (accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
+                    return i;
+                }
             }
         }
-        return -1;        
+        return -1;
     }
 
     /**
-     * This method grows the capacity of the account database by 5 if the current database 
-     * is already full.
+     * This method grows the capacity of the account database by 5 if the current
+     * database is already full.
      */
     private void grow() { 
         int accountGrow = 5;
