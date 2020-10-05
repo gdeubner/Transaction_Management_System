@@ -4,7 +4,7 @@
 package TMSPackage;
 
 //Check if this import is okay!!!!!!!!!!!!!!!!!!!!!!!!!
-import java.util.NoSuchElementException;
+
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -17,6 +17,11 @@ public class TransactionManager {
     private static AccountDatabase db;
     private static Scanner scan;
     
+    /**
+     * This method continually scans for user input until the user enters "Q". The method takes in user input,
+     * compares the first input of each command, and then calls the corresponding method an account in the 
+     * database.
+     */
     public void run() {
         db = new AccountDatabase();
         scan = new Scanner(System.in);
@@ -41,15 +46,16 @@ public class TransactionManager {
             }
 
         }
-        // scan.close();
+        scan.close();
     }
     
     /**
-     * Helper method ...
-     * 
-     * @param input            - user provided input from the command line
-     * @param requiredInputNum - the number of parameters required for a GroceryItem
-     * @param myScanner        - the Scanner object used to get user input
+     * Helper method which makes certain that the user gives the program at least the correct
+     * number of inputs. It takes in the input already read as a String[], creates another String[] with
+     * the correct size to fit the requested number of inputs, and asks the user for input until the 
+     * array is filled.
+     * @param input - user provided input from the command line
+     * @param requiredInputNum - the number of parameters required
      * @return a String array containing the 3 required parameters forGroceryItem
      */
     private static String[] getInputs(String[] input, int requiredInputNum) {
@@ -66,60 +72,88 @@ public class TransactionManager {
         return commands;
     }
     
-    private static Date createDate(String date) {
+    /**
+     * This method creates a Date object from the given string.
+     * @param date - a String version of the date to be converted.
+     * @return returns a Date object containing the converted date.
+     * @throws Exception "<date> is not a valid date." thrown if the date cannot be converted.
+     */
+    private static Date createDate(String date) throws Exception{
         int numDateValues = 3; //for the 3 values that makes up a date 
         StringTokenizer tokenizer = new StringTokenizer(date, "/", false);
+        if(tokenizer.countTokens() != numDateValues) {
+            throw new Exception(date + " is not a valid date.");
+        }
         int[] dateValues = new int[numDateValues];
         for(int i = 0; i < dateValues.length; i++) {
             try {
                 dateValues[i] = Integer.parseInt(tokenizer.nextToken());
-            } catch(NoSuchElementException exception) {
-                System.out.println("Invlaid date entered. Too few values.");
-                return null;
+            } catch(Exception e) {
+                throw new Exception(date + " is not a valid date.");
             }
         }
         return new Date(dateValues[0], dateValues[1], dateValues[2]);
     }
     
-    private static double convertBalance(String strBalance) {
+    /**
+     * Converts a string value into a double.
+     * @param strBalance - takes a String containing the amount to be converted to a double
+     * @return returns a double containing the amount
+     * @throws Exception "Invalid amount entered." Thrown if given amount cannot be converted.
+     */
+    private static double convertAmount(String strBalance) throws Exception{
         double balance;
         try {
             balance = Double.parseDouble(strBalance);
-        } catch (NumberFormatException exception){
-            System.out.println("Invalid balance entered.");
-            return -1;
-        } catch (NullPointerException exception) {
-            System.out.println("No balance entered.");
-            return -1;
+        } catch (Exception e){
+            throw new Exception("Invalid amount entered.");
         }
         return balance;
     }
     
-    private static boolean convertBoolean(String bool) throws RuntimeException {
-        if(bool.equalsIgnoreCase("true"))
+    /**
+     * This method takes a string and converts it into the corresponding boolean.
+     * @param bool the string to be converted into a boolean
+     * @return returns true of false
+     * @throws Exception "Invalid input, expected boolean." Thrown if the string does not convert into a boolean
+     */
+    private static boolean convertBoolean(String bool) throws Exception {
+        if(bool.equalsIgnoreCase("true"))///////////may need to change the "ignoreCase" part to be case sensitive
             return true;
         else if(bool.equalsIgnoreCase("false"))
             return false;
         else
-            throw new RuntimeException();
+            throw new Exception("Invalid input, expected boolean.");
     }
     
-    //inputs: 0:command, 1:fname, 2:lname, 3:balance, 4:date, 5:specialValue
-    private static Account createAccount(String[] inputs) {
+    /**
+     * This helper method creates a specified account type with a specified owner's name,
+     * a specified balance, a specified opening date. For checking 
+     * and savings, an additional boolean is needed from the user to determine if
+     * the account has direct deposit or is loyal, respectively. 
+     * @param input - a String[] containing user input
+     * @return returns the newly created account
+     */
+    private static Account createAccount(String[] input) {
         Account newAccount;
         Profile profile;
         double balance;
         Date date;
         boolean specialValue;  //directDeposit for Checking class or isLoyal for Savings class
-        profile = new Profile(inputs[1], inputs[2]);
-        balance = convertBalance(inputs[3]);
-        date = createDate(inputs[4]);
-        specialValue = convertBoolean(inputs[5]);
-        if(inputs[0].equals("OC")) {
+        profile = new Profile(input[1], input[2]);
+        try {
+            balance = convertAmount(input[3]);
+            date = createDate(input[4]);
+            specialValue = convertBoolean(input[5]);
+        } catch(Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+        if(input[0].equals("OC")) {
             newAccount = new Checking(profile, balance, date, specialValue);
-        } else if(inputs[0].equals("OS")) {
+        } else if(input[0].equals("OS")) {
             newAccount = new Savings(profile, balance, date, specialValue);
-        } else if(inputs[0].equals("OM")) {
+        } else if(input[0].equals("OM")) {
             newAccount =new MoneyMarket(profile, balance, date);
         } else {
             System.out.println("Account type error.");
@@ -127,10 +161,39 @@ public class TransactionManager {
         }
         return newAccount;
     }
+    
+    /**
+     * This helper method creates a profile object from the given input and wraps it in a given account type.
+     * The purpose of this method is to give other methods a way of passing some account information, without
+     * having to make a whole new account.
+     * @param input - a String[] containing the input from the user
+     * @return returns an Account object, either of type Checking, Savings, or MoneyMarket
+     */
+    private static Account createWrapperAccount(String[] input) {
+        Account newAccount = null;
+        Profile profile = new Profile(input[1], input[2]);
+        switch (input[0]) {
+        case "CC":
+            newAccount = new Checking(profile, -1.0, null, false);
+            break;
+        case "CS":
+            newAccount = new Savings(profile, -1.0, null, false);
+            break;
+        case "CM":
+            newAccount = new MoneyMarket(profile, -1.0, null);
+            break;
+        }
+        return newAccount;
+    }
 
-    // OC John Doe 300 1/1/2020 false //open a checking account with $300, non-direct deposit
-    // OS John Doe 500.5 1/1/2020 true //open a savings account with $500.50, loyal customer
-    // OM John Doe 1234.567 1/1/2020 //open a money market account with $1,234.57
+    
+    /**
+     * This method will receive an array of user input and creates a new account,
+     * and adds it to the database.
+     *  On success, a success message is printed. On failure, a failure
+     * message is printed. 
+     * @param input - a String[] of the users input
+     */
     private static void open(String[] input) {
         Account newAccount = null;
         int checkingSavingInputNum = 6;
@@ -154,27 +217,106 @@ public class TransactionManager {
                 System.out.println("Account opened and added to the database.");
             else
                 System.out.println("Account is already in the database.");
-        } else {
-            System.out.println("Error: New account not added");
         }
     }
 
+    /**
+     * This method will receive an array of user input and then removes a given account
+     * from the database. On success, a success message is printed. On failure, a failure
+     * message is printed. 
+     * @param input - a String[] of the users input
+     */
     private static void close(String[] input) {
-
+        int closeInputNum = 3;
+        input = getInputs(input, closeInputNum);
+        if(db.remove(createWrapperAccount(input)))
+            System.out.println("Account removed from the database.");
+        else
+        System.out.println("Account not found in database.");
     }
 
+    /**
+     * This method will receive an array of user input and then deposit a given
+     * amount into a given account. on success, a success message is printed. On 
+     * failure due to the account not existing, an error message is printed.
+     * @param input - a String[] of the users input
+     */
     private static void deposit(String[] input) {
-
+        double amount = -1;
+        Account newAccount;
+        int depositInputNum = 4;
+        input = getInputs(input, depositInputNum);
+        newAccount = createWrapperAccount(input);
+        try {
+            amount = convertAmount(input[3]);
+        } catch(Exception e){
+            System.out.println(e.toString());
+            return;
+        }
+        if(db.deposit(newAccount, amount))
+            System.out.println(amount + " deposited into account.");
+        else
+            System.out.println("Account does not exist.");
     }
     
+    /**
+     * This method will receive an array of user input and withdraw a given sum 
+     * from a given account. On success, the a success message is printed to standard output.
+     * If the account does not exist or there are insufficient funds for the withdrawl, 
+     * an error message is printed. 
+     * @param input - a String[] of the users input
+     */
     private static void withdraw(String[] input) {
-        
+        double amount = -1;
+        Account newAccount;
+        int withdrawInputNum = 4;
+        input = getInputs(input, withdrawInputNum);
+        newAccount = createWrapperAccount(input);
+        try {
+            amount = convertAmount(input[3]);
+        } catch(Exception e){
+            System.out.println(e.toString());
+            return;
+        }
+        int result = db.withdrawal(newAccount, amount);
+        if( result == 0) //success
+            System.out.println(amount + " withdrawn from account.");
+        else if(result == -1)
+            System.out.println("Account does not exist.");
+        else
+            System.out.println("Insufficient funds");
     }
     
+    /**
+     * This method will print the contents of the account, based on the input parameter.
+     * "PA" - will print a list of the accounts in the database
+     * "PD" - will print account statements ordered by the date they were opened.
+     * "PN" - will print account statements ordered by the last name of the account holder. 
+     * @param input - either "PA", "PD", or "PN", dictating the type of print that should occur. 
+     */
     private static void print(String[] input) {
-        
+        switch (input[0]){
+        case "PA":
+            System.out.println("--Listing accounts in the database--");
+            db.printAccounts();
+            System.out.println("--end of listing--");
+            break;
+        case "PD":
+            System.out.println("--Printing statements by date opened--");
+            db.printAccounts();/////////////////////////////////////convert to a printAccountSummary() method later
+            System.out.println("--end of printing--");
+            break;
+        case "PN":
+            System.out.println("--Printing statements by last name--");
+            db.printAccounts();/////////////////////////////////////convert to a printAccountSummary() method later
+            System.out.println("--end of printing--");
+            break;
+        }
     }
     
+    /**
+     * Method for quitting the program. 
+     */
     private static void quit() {
         System.out.println("Transaction processing complete.");
     }
