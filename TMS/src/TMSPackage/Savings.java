@@ -60,6 +60,17 @@ public class Savings extends Account{
         }       
     }
     
+    /**
+     * toString that calls superclass toString method and adds on account type and special savings feature
+     * if necessary.
+     * 
+     * @return String representation of account type, superclass toString, and special savings
+     */
+    @Override
+    public String toString() {
+        return "*Savings*" + super.toString() + getSpecialString();
+    }    
+    
     /*
      * This method checks if the customer is loyal, and if so, marks the acocunt as special savings.
      * 
@@ -68,7 +79,7 @@ public class Savings extends Account{
     @Override
     public String getSpecialString() {
         if (isLoyal) {
-            return "special Savings account";
+            return "*special Savings account*";
         }
         else {
             return "";
