@@ -48,7 +48,7 @@ public abstract class Account {
      * 
      * @return dateOpen, date that account was opened
      */
-    public Date getdateOpen() {
+    public Date getDateOpened() {
         return dateOpen;
     }
     
