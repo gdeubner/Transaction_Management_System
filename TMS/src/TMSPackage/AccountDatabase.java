@@ -17,20 +17,8 @@ public class AccountDatabase {
     
     public AccountDatabase() {
         int initialDBSize = 5;
-        size = 4;
+        size = 0;
         accounts = new Account[initialDBSize];
-    }
-
-
-    /**
-     * Parameterized constructor that defines features of account database of Account objects.
-     * 
-     * @param accounts array of Account objects
-     * @param size of database array
-     */
-    public AccountDatabase(Account[] accounts, int size) {
-        this.accounts = accounts;
-        this.size = size;
     }
 
     /**
@@ -68,7 +56,6 @@ public class AccountDatabase {
         for (int i = 0; i < size; i++) {
             newAccounts[i] = accounts[i];
         }
-        size +=accountGrow;
         accounts = newAccounts;
     }
 
@@ -85,7 +72,8 @@ public class AccountDatabase {
             
             if (accounts.length >= size) { 
                 grow();
-            }                
+            }            
+            accounts[size++] = account;
             return true;
         }
     }
@@ -159,23 +147,43 @@ public class AccountDatabase {
      * 
      */
     private void sortByDateOpen() { 
-
+        int length = size;
+        for (int i = 0; i < length - 1; i++) {
+            int min_idx = i;
+            for (int j = i + 1; j < length; j++) {
+                //System.out.println(" i:" + i + " j:" + j + " min_index:" + min_idx);
+                if (accounts[j].getDateOpen().compareTo( accounts[min_idx].getDateOpen()) < 0)
+                    min_idx = j;
+                }  
+            Account temp = accounts[min_idx];
+            accounts[min_idx] = accounts[i];
+            accounts[i] = temp;
+        }
     } 
     
     /**
      *
      */
-    private void sortByLastName() { 
-
-    } 
+    private void sortByLastName() {
+        int length = size;
+        for (int i = 0; i < length - 1; i++) {
+            int min_idx = i;
+            for (int j = i + 1; j < length; j++)
+                if (accounts[j].getHolder().getLName().compareTo(accounts[min_idx].getHolder().getLName()) < 0)
+                    min_idx = j;
+            Account temp = accounts[min_idx];
+            accounts[min_idx] = accounts[i];
+            accounts[i] = temp;
+        }
+    }
 
     /**
      * This is a helper method that prints out the necessary information in the dateOpen and lastName print
      * methods. It is called in each of the methods to reduce redundancy.
      */
     public void printHelper() {
-        for (int i = 0; i < size; i++) {            
-            accounts[i].toString();  
+        for (int i = 0; i < size; i++) {              
+            System.out.println(accounts[i].toString());
             System.out.println("-interest: $ " + accounts[i].monthlyInterest());
             System.out.println("-fee: $ " + accounts[i].monthlyFee());
             double newBalance = accounts[i].getBalance() + accounts[i].monthlyInterest() - accounts[i].monthlyFee();
@@ -186,7 +194,8 @@ public class AccountDatabase {
     /**
      * This method prints out the accounts from earliest date opened to most recent.
      */
-    public void printByDateOpen() { 
+    public void printByDateOpen() {
+        sortByDateOpen();
         printHelper();
     }
 
@@ -194,6 +203,7 @@ public class AccountDatabase {
      * This method prints out the accounts based on last name of holder in alphabetical order.
      */
     public void printByLastName() { 
+        sortByLastName();
         printHelper();
     }
 
@@ -203,8 +213,7 @@ public class AccountDatabase {
      */
     public void printAccounts() { 
         for (int i = 0; i < size; i++) {
-            accounts[i].toString();
-            System.out.println();
+            System.out.println(accounts[i].toString());
         }
     }
 }
