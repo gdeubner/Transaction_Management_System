@@ -79,7 +79,7 @@ public abstract class Account {
      * @return String representation of holder, balance, and dateOpen
      */
     public String toString() {
-        return holder + "* $" + balance + "*" + dateOpen;
+        return holder.toString() + "* $" + balance + "*" + dateOpen;
     }
 
     /**
@@ -95,7 +95,5 @@ public abstract class Account {
     /**
      * Empty abstract method that is implemeneted in subclasses and returns appropriate strings.
      */
-
     public abstract String getSpecialString();       
-
 }
