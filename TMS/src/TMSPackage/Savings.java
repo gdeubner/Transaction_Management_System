@@ -11,6 +11,7 @@ package TMSPackage;
  */
 public class Savings extends Account{
     private boolean isLoyal;
+    private char type;
 
     /**
      * Parameterized constructor that calls the constructor from the superclass
@@ -24,6 +25,7 @@ public class Savings extends Account{
     public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
         super(holder, balance, dateOpen);
         this.isLoyal = isLoyal;
+        type = 's';
     }
 
     /**
@@ -85,4 +87,14 @@ public class Savings extends Account{
             return "";
         }
     }
+    
+    /**
+     * returns 's' indicating this Account is a savings account
+     * @return returns the char 's'
+     */
+    @Override
+    public char getAccountType() {
+        return type;
+    }
+    
 }

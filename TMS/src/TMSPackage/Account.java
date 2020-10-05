@@ -3,6 +3,8 @@
  */
 package TMSPackage;
 
+import java.text.DecimalFormat;
+
 /**
  * This class defines the basic features of an account, regardless of what type it is.
  * It contains getter methods to access its private instance variables, and two abstract
@@ -79,22 +81,41 @@ public abstract class Account {
      * @return String representation of holder, balance, and dateOpen
      */@Override
     public String toString() {
-        return holder.toString() + "* $" + balance + "*" + dateOpen;
+         DecimalFormat decimalFormat = new DecimalFormat(".00");
+        return holder.toString() + "* $" + decimalFormat.format(balance) + "*" + dateOpen;
     }
     
 
     /**
      * Empty abstract method that is implemented in each of child classes.
+     * @return
      */
     public abstract double monthlyInterest();    
 
     /**
      * Empty abstract method that is implemented in each of child classes.
+     * @return
      */
     public abstract double monthlyFee();   
 
     /**
      * Empty abstract method that is implemeneted in subclasses and returns appropriate strings.
+     * @return
      */
-    public abstract String getSpecialString();       
+    public abstract String getSpecialString();  
+    
+    /**
+     * returns a char representing the type of account. c = Checking
+     * s = Savings, m = MoneyMarket
+     * @return returns a char
+     */
+    public abstract char getAccountType();
+    
+    /**
+     * This method withdraws the given amount from the account's balance.
+     * @param amount - the amount to be withdrawn.
+     */
+    public void withdraw(double amount) {
+        balance -= amount;
+    }
 }

@@ -2,7 +2,7 @@
  * 
  */
 package TMSPackage;
-
+import java.text.DecimalFormat;
 /**
  * This class contains an array of account objects and methods for different account operations
  * like finding an account, making a deposit/withdrawal, sorting the accounts by dateOpen
@@ -12,38 +12,49 @@ package TMSPackage;
 public class AccountDatabase {
     private Account[] accounts;
     private int size;
-
+    DecimalFormat decimalFormat;
 
     
     public AccountDatabase() {
         int initialDBSize = 5;
         size = 0;
         accounts = new Account[initialDBSize];
+        decimalFormat = new DecimalFormat("0.00");
     }
 
     /**
-     * This method find a certain account and returns the index of the found account upon
-     * success, searching based on account holder and account type. -1 returned on failure.
+     * This method find a certain account and returns the index of the found account
+     * upon success, searching based on account holder and account type. -1 returned
+     * on failure.
      * 
      * @param account - the account to be searched for in accounts.
      * @return - returns index of account.
      */
-    private int find(Account account) { 
-        boolean isChecking = account instanceof Checking;
-        boolean isSavings = account instanceof Savings;
-        boolean isMoneyMarket = account instanceof MoneyMarket;
-
+    private int find(Account account) {
         for (int i = 0; i < size; i++) {
-            if(account.getHolder().equals(accounts[i].getHolder())) {
-                if (((accounts[i] instanceof Checking == isChecking))
-                        || ((accounts[i] instanceof Savings == isSavings))
-                        || ((accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
+            if (account.getHolder().equals(accounts[i].getHolder())) {
+                if (account.getAccountType() == accounts[i].getAccountType()) {
                     return i;
                 }
             }
-            
         }
         return -1;
+    }
+    
+    /**
+     * This method searches for and returns a given account.
+     * @param account - a account wrapper Account class, containing only the desired account name and type.
+     * @return returns the sought after account. Returns null on failure.
+     */
+    private Account getAccount(Account account) {
+        for (int i = 0; i < size; i++) {
+            if (account.getHolder().equals(accounts[i].getHolder())) {
+                if (account.getAccountType() == accounts[i].getAccountType()) {
+                    return accounts[i];
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -116,7 +127,8 @@ public class AccountDatabase {
             return false;
         }
         else {
-            account.credit(amount);
+            Account targetAccount = getAccount(account);
+            targetAccount.credit(amount);
             return true;
         }
     }    
@@ -134,17 +146,19 @@ public class AccountDatabase {
             return -1; //account doesn't exist
         }
         else {
-            if (amount > account.getBalance()) {
+            Account targetAccount = getAccount(account);
+            if (amount > targetAccount.getBalance()) {
                 return 1; //insufficient funds
             }
             else {
+                targetAccount.withdraw(amount);
                 return 0; //withdrawal successful
             }
         }
     }   
 
     /**
-     * 
+     * This method employs select sort to sort the Accounts by date opened
      */
     private void sortByDateOpen() { 
         int length = size;
@@ -162,7 +176,7 @@ public class AccountDatabase {
     } 
     
     /**
-     *
+     *This method employs select sort to sort the Accounts by last name
      */
     private void sortByLastName() {
         int length = size;
@@ -184,10 +198,10 @@ public class AccountDatabase {
     public void printHelper() {
         for (int i = 0; i < size; i++) {              
             System.out.println(accounts[i].toString());
-            System.out.println("-interest: $ " + accounts[i].monthlyInterest());
-            System.out.println("-fee: $ " + accounts[i].monthlyFee());
+            System.out.println("-interest: $ " + decimalFormat.format(accounts[i].monthlyInterest()));
+            System.out.println("-fee: $ " + decimalFormat.format(accounts[i].monthlyFee()));
             double newBalance = accounts[i].getBalance() + accounts[i].monthlyInterest() - accounts[i].monthlyFee();
-            System.out.println("-new balance: $ " + newBalance);
+            System.out.println("-new balance: $ " + decimalFormat.format(newBalance));
         }
     }
 
@@ -216,4 +230,5 @@ public class AccountDatabase {
             System.out.println(accounts[i].toString());
         }
     }
+    
 }

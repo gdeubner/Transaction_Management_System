@@ -159,7 +159,6 @@ public class TransactionManager {
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            e.printStackTrace(System.out);
             return null;
         }
         return newAccount;
@@ -175,14 +174,15 @@ public class TransactionManager {
     private static Account createWrapperAccount(String[] input) {
         Account newAccount = null;
         Profile profile = new Profile(input[1], input[2]);
-        switch (input[0]) {
-        case "CC":
+        String accountType = input[0].substring(1, 2);
+        switch (accountType) {
+        case "C":
             newAccount = new Checking(profile, -1.0, null, false);
             break;
-        case "CS":
+        case "S":
             newAccount = new Savings(profile, -1.0, null, false);
             break;
-        case "CM":
+        case "M":
             newAccount = new MoneyMarket(profile, -1.0, null);
             break;
         }
@@ -253,7 +253,7 @@ public class TransactionManager {
         try {
             amount = convertAmount(input[3]);
         } catch(Exception e){
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
             return;
         }
         if(db.deposit(newAccount, amount))
@@ -278,9 +278,9 @@ public class TransactionManager {
         try {
             amount = convertAmount(input[3]);
         } catch(Exception e){
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
             return;
-        }
+        }     
         int result = db.withdrawal(newAccount, amount);
         if( result == 0) //success
             System.out.println(amount + " withdrawn from account.");
@@ -324,7 +324,5 @@ public class TransactionManager {
         System.out.println("Transaction processing complete.");
     }
     
-    
-   
-    
+
 }
