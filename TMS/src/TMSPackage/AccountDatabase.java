@@ -14,6 +14,13 @@ public class AccountDatabase {
     private Account[] accounts;
     private int size;
 
+    
+    public AccountDatabase() {
+        int initialDBSize = 5;
+        size = 4;
+        accounts = new Account[initialDBSize];
+    }
+    
     /**
      * This method find a certain account and returns the index of the found account upon
      * success, searching based on account holder and account type. -1 returned on failure.
@@ -27,19 +34,21 @@ public class AccountDatabase {
         boolean isMoneyMarket = account instanceof MoneyMarket;
 
         for (int i = 0; i < size; i++) {
-            boolean checkHolder = account.getHolder().equals(accounts[i].getHolder());
-            if ((checkHolder && (accounts[i] instanceof Checking == isChecking)) ||
-                    (checkHolder && (accounts[i] instanceof Savings == isSavings)) ||
-                    (checkHolder && (accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
-                return i;
+            if (accounts[i] != null) {
+                boolean checkHolder = account.getHolder().equals(accounts[i].getHolder());
+                if ((checkHolder && (accounts[i] instanceof Checking == isChecking))
+                        || (checkHolder && (accounts[i] instanceof Savings == isSavings))
+                        || (checkHolder && (accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
+                    return i;
+                }
             }
         }
-        return -1;        
+        return -1;
     }
 
     /**
-     * This method grows the capacity of the account database by 5 if the current database 
-     * is already full.
+     * This method grows the capacity of the account database by 5 if the current
+     * database is already full.
      */
     private void grow() { 
         int accountGrow = 5;
@@ -161,7 +170,7 @@ public class AccountDatabase {
                 accountType = "MoneyMarket";
             }
             System.out.println("*" + accountType + "*" + accounts[i].getHolder() + "* " 
-                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpen().toString());                        
+                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpened().toString());                        
         }
     }
 
@@ -181,7 +190,7 @@ public class AccountDatabase {
                 accountType = "MoneyMarket";
             }
             System.out.println("*" + accountType + "*" + accounts[i].getHolder() + "* " 
-                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpen().toString());                        
+                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpened().toString());                        
         }        
     }
 
@@ -203,7 +212,7 @@ public class AccountDatabase {
             }
             String accountBoolean = accounts[i].getSpecialString();        
             System.out.println("*" + accountType + "*" + accounts[i].getHolder() + "* " 
-                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpen().toString()
+                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpened().toString()
                     + "*" + accountBoolean);
         }
     }

@@ -83,5 +83,7 @@ public abstract class Account {
     /**
      * 
      */
-    public abstract double monthlyFee();    
+    public abstract double monthlyFee();
+
+    public abstract String getSpecialString();
 }
