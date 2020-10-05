@@ -34,7 +34,7 @@ public class Date implements Comparable<Date>{
     /**
      *Method which compares this Date object object to the Date Object passed as a parameter.
      *Implements the Comparable interface.
-     *@return returns 0 is equivalent, 1 if this Date comes after the passed Date Object, 
+     *@return returns 0 if equivalent, 1 if this Date comes after the passed Date Object, 
      *and -1 if this Date Object comes before the passed Date object.
      */
     public int compareTo(Date date) {//return 0, 1, or -1    when this bigger than param, => 1

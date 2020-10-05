@@ -144,19 +144,22 @@ public class TransactionManager {
         try {
             balance = convertAmount(input[3]);
             date = createDate(input[4]);
+            if(input[0].equals("OM")) {
+                newAccount =new MoneyMarket(profile, balance, date);
+                return newAccount;
+            }
             specialValue = convertBoolean(input[5]);
+            if(input[0].equals("OC")) {
+                newAccount = new Checking(profile, balance, date, specialValue);
+            } else if(input[0].equals("OS")) {
+                newAccount = new Savings(profile, balance, date, specialValue);
+            } else   {
+                System.out.println("Account type error.");
+                return null;
+            }
         } catch(Exception e) {
-            System.out.println(e.toString());
-            return null;
-        }
-        if(input[0].equals("OC")) {
-            newAccount = new Checking(profile, balance, date, specialValue);
-        } else if(input[0].equals("OS")) {
-            newAccount = new Savings(profile, balance, date, specialValue);
-        } else if(input[0].equals("OM")) {
-            newAccount =new MoneyMarket(profile, balance, date);
-        } else {
-            System.out.println("Account type error.");
+            System.out.println(e.getMessage());
+            e.printStackTrace(System.out);
             return null;
         }
         return newAccount;
@@ -303,12 +306,12 @@ public class TransactionManager {
             break;
         case "PD":
             System.out.println("--Printing statements by date opened--");
-            db.printAccounts();/////////////////////////////////////convert to a printAccountSummary() method later
+            db.printByDateOpen();
             System.out.println("--end of printing--");
             break;
         case "PN":
             System.out.println("--Printing statements by last name--");
-            db.printAccounts();/////////////////////////////////////convert to a printAccountSummary() method later
+            db.printByLastName();
             System.out.println("--end of printing--");
             break;
         }
@@ -322,10 +325,6 @@ public class TransactionManager {
     }
     
     
-    public static void main(String[] args) {
-        //System.out.println(createDate("9/30/2020").toString());
-        
-        
-    }
+   
     
 }
