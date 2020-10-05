@@ -53,7 +53,18 @@ public class MoneyMarket extends Account{
             return 12;
         }
     }
-    
+
+    /**
+     * toString method that calls superclass toString method and adds on number of 
+     * withdrawals.
+     * 
+     * @return String representation of account type, superclass toString, and withdrawal number
+     */
+    @Override
+    public String toString() {
+        return "*Money Market*" + super.toString() + getSpecialString();
+    }
+
     /*
      * This method returns the number of withdrawals the holder has made on the account.
      * 
@@ -62,10 +73,10 @@ public class MoneyMarket extends Account{
     @Override
     public String getSpecialString() {
         if (withdrawals == 1) {
-            return withdrawals + " withdrawal";
+            return "*" + withdrawals + " withdrawal*";
         }
         else {
-            return withdrawals + " withdrawals";
+            return "*" + withdrawals + " withdrawals*";
         }
     }
 }

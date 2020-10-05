@@ -6,13 +6,13 @@ package TMSPackage;
 /**
  * This class contains an array of account objects and methods for different account operations
  * like finding an account, making a deposit/withdrawal, sorting the accounts by dateOpen
- * or lastName, or printing the account list. * 
+ * or lastName, or printing the account list.  
  * @author Sandeep Alankar, Graham Deubner
- *
  */
 public class AccountDatabase {
     private Account[] accounts;
     private int size;
+
 
     
     public AccountDatabase() {
@@ -20,7 +20,19 @@ public class AccountDatabase {
         size = 4;
         accounts = new Account[initialDBSize];
     }
-    
+
+
+    /**
+     * Parameterized constructor that defines features of account database of Account objects.
+     * 
+     * @param accounts array of Account objects
+     * @param size of database array
+     */
+    public AccountDatabase(Account[] accounts, int size) {
+        this.accounts = accounts;
+        this.size = size;
+    }
+
     /**
      * This method find a certain account and returns the index of the found account upon
      * success, searching based on account holder and account type. -1 returned on failure.
@@ -70,11 +82,10 @@ public class AccountDatabase {
             return false;
         }
         else {
-            int initalCapacity = 5;
-            if (size %initalCapacity == 0) { //if size is multiple of 5, then database is full
+            
+            if (accounts.length >= size) { 
                 grow();
-            }
-            accounts[size++] = account;    
+            }                
             return true;
         }
     }
@@ -150,48 +161,40 @@ public class AccountDatabase {
     private void sortByDateOpen() { 
 
     } 
+    
+    /**
+     *
+     */
     private void sortByLastName() { 
 
     } 
 
     /**
+     * This is a helper method that prints out the necessary information in the dateOpen and lastName print
+     * methods. It is called in each of the methods to reduce redundancy.
+     */
+    public void printHelper() {
+        for (int i = 0; i < size; i++) {            
+            accounts[i].toString();  
+            System.out.println("-interest: $ " + accounts[i].monthlyInterest());
+            System.out.println("-fee: $ " + accounts[i].monthlyFee());
+            double newBalance = accounts[i].getBalance() + accounts[i].monthlyInterest() - accounts[i].monthlyFee();
+            System.out.println("-new balance: $ " + newBalance);
+        }
+    }
+
+    /**
      * This method prints out the accounts from earliest date opened to most recent.
      */
     public void printByDateOpen() { 
-        for (int i = 0; i < size; i++) {
-            boolean isChecking = accounts[i] instanceof Checking;
-            boolean isSavings = accounts[i] instanceof Savings;
-            String accountType = "";
-            if (isChecking) {
-                accountType = "Checking";
-            } else if (isSavings) {
-                accountType = "Savings";
-            }  else {
-                accountType = "MoneyMarket";
-            }
-            System.out.println("*" + accountType + "*" + accounts[i].getHolder() + "* " 
-                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpened().toString());                        
-        }
+        printHelper();
     }
 
     /**
      * This method prints out the accounts based on last name of holder in alphabetical order.
      */
     public void printByLastName() { 
-        for (int i = 0; i < size; i++) {
-            boolean isChecking = accounts[i] instanceof Checking;
-            boolean isSavings = accounts[i] instanceof Savings;
-            String accountType = "";
-            if (isChecking) {
-                accountType = "Checking";
-            } else if (isSavings) {
-                accountType = "Savings";
-            }  else {
-                accountType = "MoneyMarket";
-            }
-            System.out.println("*" + accountType + "*" + accounts[i].getHolder() + "* " 
-                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpened().toString());                        
-        }        
+        printHelper();
     }
 
     /**
@@ -200,20 +203,8 @@ public class AccountDatabase {
      */
     public void printAccounts() { 
         for (int i = 0; i < size; i++) {
-            boolean isChecking = accounts[i] instanceof Checking;
-            boolean isSavings = accounts[i] instanceof Savings;       
-            String accountType = "";
-            if (isChecking) {
-                accountType = "Checking";
-            } else if (isSavings) {
-                accountType = "Savings";
-            }  else {
-                accountType = "MoneyMarket";
-            }
-            String accountBoolean = accounts[i].getSpecialString();        
-            System.out.println("*" + accountType + "*" + accounts[i].getHolder() + "* " 
-                    + "$" + accounts[i].getBalance() + "*" + accounts[i].getDateOpened().toString()
-                    + "*" + accountBoolean);
+            accounts[i].toString();
+            System.out.println();
         }
     }
 }
