@@ -77,10 +77,11 @@ public abstract class Account {
      * subclasses.
      * 
      * @return String representation of holder, balance, and dateOpen
-     */
+     */@Override
     public String toString() {
         return holder.toString() + "* $" + balance + "*" + dateOpen;
     }
+    
 
     /**
      * Empty abstract method that is implemented in each of child classes.

@@ -41,8 +41,17 @@ public class Profile {
     
     /**
      * 
-     */
+     */@Override
     public String toString() {
         return fname + " " + lname;
+    }
+
+    /**
+     * @param prof
+     * @return
+     */ boolean equals(Profile prof) {
+        if(fname.equals(prof.getFName()) && lname.equals(prof.getLName()))
+            return true;
+        return false;
     }
 }

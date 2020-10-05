@@ -34,14 +34,14 @@ public class AccountDatabase {
         boolean isMoneyMarket = account instanceof MoneyMarket;
 
         for (int i = 0; i < size; i++) {
-            if (accounts[i] != null) {
-                boolean checkHolder = account.getHolder().equals(accounts[i].getHolder());
-                if ((checkHolder && (accounts[i] instanceof Checking == isChecking))
-                        || (checkHolder && (accounts[i] instanceof Savings == isSavings))
-                        || (checkHolder && (accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
+            if(account.getHolder().equals(accounts[i].getHolder())) {
+                if (((accounts[i] instanceof Checking == isChecking))
+                        || ((accounts[i] instanceof Savings == isSavings))
+                        || ((accounts[i] instanceof MoneyMarket == isMoneyMarket))) {
                     return i;
                 }
             }
+            
         }
         return -1;
     }
@@ -50,7 +50,7 @@ public class AccountDatabase {
      * This method grows the capacity of the account database by 5 if the current
      * database is already full.
      */
-    private void grow() { 
+    private void grow() {
         int accountGrow = 5;
         Account[] newAccounts = new Account[accounts.length + accountGrow];
         for (int i = 0; i < size; i++) {
