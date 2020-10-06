@@ -81,7 +81,7 @@ public abstract class Account {
      * @return String representation of holder, balance, and dateOpen
      */@Override
     public String toString() {
-         DecimalFormat decimalFormat = new DecimalFormat(".00");
+         DecimalFormat decimalFormat = new DecimalFormat(",000.00");
         return holder.toString() + "* $" + decimalFormat.format(balance) + "*" + dateOpen;
     }
     

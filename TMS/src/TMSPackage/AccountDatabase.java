@@ -12,14 +12,12 @@ import java.text.DecimalFormat;
 public class AccountDatabase {
     private Account[] accounts;
     private int size;
-    DecimalFormat decimalFormat;
 
     
     public AccountDatabase() {
         int initialDBSize = 5;
         size = 0;
         accounts = new Account[initialDBSize];
-        decimalFormat = new DecimalFormat("0.00");
     }
 
     /**
@@ -72,7 +70,6 @@ public class AccountDatabase {
 
     /**
      * This method return false if account exists, adds account to database and grows if necessary.
-     * 
      * @return false if account is already in database, returns true if account can be added
      */
     public boolean add(Account account) {
@@ -152,6 +149,8 @@ public class AccountDatabase {
             }
             else {
                 targetAccount.withdraw(amount);
+                if(targetAccount instanceof MoneyMarket)
+                    ((MoneyMarket) targetAccount).incrementWithdrawal();
                 return 0; //withdrawal successful
             }
         }
@@ -196,12 +195,14 @@ public class AccountDatabase {
      * methods. It is called in each of the methods to reduce redundancy.
      */
     public void printHelper() {
+        DecimalFormat decimalFormat;
+        decimalFormat = new DecimalFormat(",000.00");
         for (int i = 0; i < size; i++) {              
             System.out.println(accounts[i].toString());
             System.out.println("-interest: $ " + decimalFormat.format(accounts[i].monthlyInterest()));
             System.out.println("-fee: $ " + decimalFormat.format(accounts[i].monthlyFee()));
             double newBalance = accounts[i].getBalance() + accounts[i].monthlyInterest() - accounts[i].monthlyFee();
-            System.out.println("-new balance: $ " + decimalFormat.format(newBalance));
+            System.out.println("-new balance: $ " + decimalFormat.format(newBalance) + "\n");
         }
     }
 
@@ -209,26 +210,47 @@ public class AccountDatabase {
      * This method prints out the accounts from earliest date opened to most recent.
      */
     public void printByDateOpen() {
-        sortByDateOpen();
-        printHelper();
-    }
+        if (size == 0)
+            System.out.println("Database is empty!");
+        else {
+            sortByDateOpen();
+            System.out.println("--Printing statements by date opened--");
+            printHelper();
+            System.out.println("--end of printing--\n");
 
-    /**
-     * This method prints out the accounts based on last name of holder in alphabetical order.
-     */
-    public void printByLastName() { 
-        sortByLastName();
-        printHelper();
-    }
-
-    /**
-     * This method prints out a list of made accounts, including the account type, holder, balance, 
-     * date opened, and unique feature.
-     */
-    public void printAccounts() { 
-        for (int i = 0; i < size; i++) {
-            System.out.println(accounts[i].toString());
         }
     }
-    
+
+    /**
+     * This method prints out the accounts based on last name of holder in
+     * alphabetical order.
+     */
+    public void printByLastName() {
+        if (size == 0)
+            System.out.println("Database is empty!");
+        else {
+            sortByLastName();
+            System.out.println("--Printing statements by last name--");
+            printHelper();
+            System.out.println("--end of printing--\n");
+        }
+    }
+
+    /**
+     * This method prints out a list of made accounts, including the account type,
+     * holder, balance, date opened, and unique feature.
+     */
+    public void printAccounts() {
+        if (size == 0)
+            System.out.println("Database is empty!");
+        else {
+            System.out.println("--Listing accounts in the database--");
+            for (int i = 0; i < size; i++) {
+                System.out.println(accounts[i].toString());
+            }
+            System.out.println("--end of listing--\n");
+        }
+
+    }
+
 }
