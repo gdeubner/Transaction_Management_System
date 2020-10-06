@@ -11,7 +11,6 @@ package TMSPackage;
  */
 public class Checking extends Account {
     private boolean directDeposit;
-    char type;
 
     /**
      * Parameterized constructor that calls the constructor from the superclass
@@ -25,7 +24,6 @@ public class Checking extends Account {
     public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
         super(holder, balance, dateOpen);
         this.directDeposit = directDeposit;
-        type = 'c';
     }
 
     /**
@@ -89,7 +87,7 @@ public class Checking extends Account {
      */
     @Override
     public char getAccountType() {
-        return type;
+        return 'c';
     }
     
 }

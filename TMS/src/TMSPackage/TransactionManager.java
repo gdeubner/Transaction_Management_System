@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
- * @author gdeub
+ * @author Graham Deubner, Sandeep Alankar
  *
  */
 public class TransactionManager {
@@ -144,6 +144,11 @@ public class TransactionManager {
         try {
             balance = convertAmount(input[3]);
             date = createDate(input[4]);
+            if(!date.isValid()) {
+                System.out.println(date.toString() + " is not a valid date.");
+                return null;
+            }
+                
             if(input[0].equals("OM")) {
                 newAccount =new MoneyMarket(profile, balance, date);
                 return newAccount;
@@ -300,19 +305,13 @@ public class TransactionManager {
     private static void print(String[] input) {
         switch (input[0]){
         case "PA":
-            System.out.println("--Listing accounts in the database--");
             db.printAccounts();
-            System.out.println("--end of listing--");
             break;
         case "PD":
-            System.out.println("--Printing statements by date opened--");
             db.printByDateOpen();
-            System.out.println("--end of printing--");
             break;
         case "PN":
-            System.out.println("--Printing statements by last name--");
             db.printByLastName();
-            System.out.println("--end of printing--");
             break;
         }
     }

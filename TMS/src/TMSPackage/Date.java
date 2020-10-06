@@ -56,7 +56,7 @@ public class Date implements Comparable<Date>{
                 df2char.format(day) + "/" + df4char.format(year);
         return str;
     }
-    
+
     /**
      * method checks to see the objects day, month and year can be a real date.
      * @return returns true if the date object contains a real date, false otherwise.
@@ -82,7 +82,7 @@ public class Date implements Comparable<Date>{
             }
             if (day > febDays)
                 return false;
-        } else if (day > daysInEachMonth[month])
+        } else if (day > daysInEachMonth[month-1])
             return false;
         return true;
     }

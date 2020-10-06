@@ -11,7 +11,6 @@ package TMSPackage;
  */
 public class MoneyMarket extends Account{   
     private int withdrawals;
-    private char type;
 
     /**
      * Parameterized constructor that calls the constructor from the superclass
@@ -24,7 +23,6 @@ public class MoneyMarket extends Account{
     public MoneyMarket(Profile holder, double balance, Date dateOpen) {
         super(holder, balance, dateOpen);
         withdrawals = 0;
-        type = 'm';
     }
 
     /**
@@ -87,7 +85,14 @@ public class MoneyMarket extends Account{
      */
     @Override
     public char getAccountType() {
-        return type;
+        return 'm';
+    }
+    
+    /**
+     * This method increments withdrawals
+     */
+    public void incrementWithdrawal() {
+        withdrawals++;
     }
     
 }
