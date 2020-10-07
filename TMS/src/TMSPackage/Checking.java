@@ -40,7 +40,7 @@ public class Checking extends Account {
 
     /**
      * This method returns the monthly fee that the holder pays, which is dependent
-     * on directDeposit and the current acocunt balance.
+     * on directDeposit and the current account balance.
      * 
      * @return monthly fee
      */
