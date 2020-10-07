@@ -26,15 +26,15 @@ public class MoneyMarket extends Account{
     }
 
     /**
-     * This method returns the monthly interest rate, which is the MoneyMarket annual interest
-     * rate divided by the total number of months in a year.
+     * This method returns the monthly interest, which is the MoneyMarket annual interest
+     * rate divided by the total number of months in a year times the account balance.
      * 
-     * @return monthly interest rate
+     * @return monthly interest amount
      */
     @Override
     public double monthlyInterest() {
         double interestRate = 0.0065;
-        return interestRate/Month.TOTALMONTHS;
+        return interestRate/Month.TOTALMONTHS * super.getBalance();    
     }
 
     /**
@@ -64,10 +64,10 @@ public class MoneyMarket extends Account{
         return "*Money Market*" + super.toString() + getSpecialString();
     }
 
-
-    /**
+    /*
      * This method returns the number of withdrawals the holder has made on the account.
-     *@return number of withdrawals followed by either "withdrawal" or "withdrawals" 
+     * 
+     * @return number of withdrawals followed by either "withdrawal" or "withdrawals" 
      */
     @Override
     public String getSpecialString() {
@@ -78,7 +78,7 @@ public class MoneyMarket extends Account{
             return "*" + withdrawals + " withdrawals*";
         }
     }
-    
+
     /**
      * returns 'm' indicating this Account is a MoneyMarket account
      * @return returns the char 'm'
@@ -87,14 +87,11 @@ public class MoneyMarket extends Account{
     public char getAccountType() {
         return 'm';
     }
-    
+
     /**
-     *@return 
+     * This method increments withdrawals
      */
-    @Override
-    public void withdraw(double amount) {
-        super.withdraw(amount);
+    public void incrementWithdrawal() {
         withdrawals++;
-    }
-    
+    }    
 }
