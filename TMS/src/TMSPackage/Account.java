@@ -22,6 +22,7 @@ public abstract class Account {
      * @param holder
      * @param balance, money amount in account
      * @param dateOpen
+     * 
      */
     public Account (Profile holder, double balance, Date dateOpen) {
         this.holder = holder;
@@ -57,8 +58,7 @@ public abstract class Account {
     }
 
     /**
-     * Decreases the balance by amount.
-     * 
+     * Decreases the balance by amount. 
      * @param amount 
      */
     public void debit(double amount) { 
@@ -66,8 +66,7 @@ public abstract class Account {
     } 
 
     /**
-     * Increases the balance by amount.
-     * 
+     * Increases the balance by amount. 
      * @param amount
      */
     public void credit(double amount) { 
@@ -82,31 +81,36 @@ public abstract class Account {
      */@Override
     public String toString() {
          DecimalFormat decimalFormat = new DecimalFormat(",000.00");
-        return holder.toString() + "* $" + decimalFormat.format(balance) + "*" + dateOpen;
+        return holder.toString() + "* $" + decimalFormat.format(balance) + "*" + dateOpen.toString();
     }
     
 
     /**
      * Empty abstract method that is implemented in each of child classes.
-     * @return
+     * 
+     * @return monthly interest amount
      */
     public abstract double monthlyInterest();    
 
     /**
      * Empty abstract method that is implemented in each of child classes.
-     * @return
+     * 
+     * @return monthly fee owed
      */
     public abstract double monthlyFee();   
 
     /**
-     * Empty abstract method that is implemented in subclasses and returns appropriate strings.
-     * @return
+     * Empty abstract method that is implemented in subclasses and returns 
+     * appropriate strings.
+     * 
+     * @return string representation of account options for each account
      */
     public abstract String getSpecialString();  
     
     /**
      * returns a char representing the type of account. c = Checking
      * s = Savings, m = MoneyMarket
+     * 
      * @return returns a char
      */
     public abstract char getAccountType();
@@ -114,6 +118,7 @@ public abstract class Account {
     /**
      * This method withdraws the given amount from the account's balance.
      * @param amount - the amount to be withdrawn.
+     * 
      */
     public void withdraw(double amount) {
         balance -= amount;
