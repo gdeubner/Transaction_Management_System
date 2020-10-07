@@ -14,11 +14,11 @@ public class MoneyMarket extends Account{
 
     /**
      * Parameterized constructor that calls the constructor from the superclass
-     * and adds a fourth parameter, withdrawals, which is unique to a MoneyMarket account.
-     * 
+     * and adds a fourth parameter, withdrawals, which is unique to a MoneyMarket account.    
      * @param holder - name of person owning account
      * @param balance -  money amount in account
      * @param dateOpen -  date that account was opened
+     * 
      */
     public MoneyMarket(Profile holder, double balance, Date dateOpen) {
         super(holder, balance, dateOpen);
@@ -64,7 +64,7 @@ public class MoneyMarket extends Account{
         return "*Money Market*" + super.toString() + getSpecialString();
     }
 
-    /*
+    /**
      * This method returns the number of withdrawals the holder has made on the account.
      * 
      * @return number of withdrawals followed by either "withdrawal" or "withdrawals" 
@@ -81,6 +81,7 @@ public class MoneyMarket extends Account{
 
     /**
      * returns 'm' indicating this Account is a MoneyMarket account
+     * 
      * @return returns the char 'm'
      */
     @Override
