@@ -99,7 +99,7 @@ public abstract class Account {
     public abstract double monthlyFee();   
 
     /**
-     * Empty abstract method that is implemeneted in subclasses and returns appropriate strings.
+     * Empty abstract method that is implemented in subclasses and returns appropriate strings.
      * @return
      */
     public abstract String getSpecialString();  

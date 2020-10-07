@@ -148,8 +148,6 @@ public class AccountDatabase {
             }
             else {
                 targetAccount.withdraw(amount);
-                if(targetAccount instanceof MoneyMarket)
-                    ((MoneyMarket) targetAccount).incrementWithdrawal();
                 return 0; //withdrawal successful
             }
         }
