@@ -9,8 +9,12 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
+ * This class manages the transactions that the user would like to perform on an account and
+ * displays the appropriate results on the console. The user can perform different operations on
+ * an account and for each operation, the run() method checks to see if the input is valid and
+ * then calls the right method to perform said operation. The user will be asked for inputs until 
+ * he/she enters "Q", which will end the transaction processing.
  * @author Graham Deubner, Sandeep Alankar
- *
  */
 public class TransactionManager {
     
@@ -44,7 +48,6 @@ public class TransactionManager {
             } else {
                 System.out.println("Command " + input[0] + " not supported!");
             }
-
         }
         scan.close();
     }
@@ -193,7 +196,6 @@ public class TransactionManager {
         }
         return newAccount;
     }
-
     
     /**
      * This method will receive an array of user input and creates a new account,
@@ -201,6 +203,7 @@ public class TransactionManager {
      *  On success, a success message is printed. On failure, a failure
      * message is printed. 
      * @param input - a String[] of the users input
+     * 
      */
     private static void open(String[] input) {
         Account newAccount = null;
@@ -233,6 +236,7 @@ public class TransactionManager {
      * from the database. On success, a success message is printed. On failure, a failure
      * message is printed. 
      * @param input - a String[] of the users input
+     * 
      */
     private static void close(String[] input) {
         int closeInputNum = 3;
@@ -248,6 +252,7 @@ public class TransactionManager {
      * amount into a given account. on success, a success message is printed. On 
      * failure due to the account not existing, an error message is printed.
      * @param input - a String[] of the users input
+     * 
      */
     private static void deposit(String[] input) {
         double amount = -1;
@@ -273,6 +278,7 @@ public class TransactionManager {
      * If the account does not exist or there are insufficient funds for the withdrawl, 
      * an error message is printed. 
      * @param input - a String[] of the users input
+     * 
      */
     private static void withdraw(String[] input) {
         double amount = -1;
@@ -301,6 +307,7 @@ public class TransactionManager {
      * "PD" - will print account statements ordered by the date they were opened.
      * "PN" - will print account statements ordered by the last name of the account holder. 
      * @param input - either "PA", "PD", or "PN", dictating the type of print that should occur. 
+     * 
      */
     private static void print(String[] input) {
         switch (input[0]){
@@ -321,7 +328,5 @@ public class TransactionManager {
      */
     private static void quit() {
         System.out.println("Transaction processing complete.");
-    }
-    
-
+    }  
 }
