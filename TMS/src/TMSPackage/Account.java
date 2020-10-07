@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 /**
  * This class defines the basic features of an account, regardless of what type it is.
  * It contains getter methods to access its private instance variables, and two abstract
- * methods that are implemented in each of its child classes. * 
+ * methods that are implemented in each of its child classes.  
  * @author Sandeep Alankar, Graham Deubner
  */
 public abstract class Account {    
@@ -82,18 +82,19 @@ public abstract class Account {
     public String toString() {
          DecimalFormat decimalFormat = new DecimalFormat(",000.00");
         return holder.toString() + "* $" + decimalFormat.format(balance) + "*" + dateOpen.toString();
-    }
-    
+    }    
 
     /**
-     * Empty abstract method that is implemented in each of child classes.
+     * Empty abstract method that is implemented in each of child classes to return monthly
+     * interest on account.
      * 
      * @return monthly interest amount
      */
     public abstract double monthlyInterest();    
 
     /**
-     * Empty abstract method that is implemented in each of child classes.
+     * Empty abstract method that is implemented in each of child classes to return monthly 
+     * fee.
      * 
      * @return monthly fee owed
      */
