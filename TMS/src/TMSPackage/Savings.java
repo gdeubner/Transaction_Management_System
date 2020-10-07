@@ -27,20 +27,20 @@ public class Savings extends Account{
     }
 
     /**
-     * This method returns the monthly interest rate, which is different depending on whether
+     * This method returns the monthly interest amount, which is different depending on whether
      * or not the customer is loyal or not.
      * 
-     * @return monthly interest rate, which is annual interest date divided by num of months
+     * @return monthly interest amount, monthly interest rate times account balance
      */
     @Override
     public double monthlyInterest() {
         double monthInterest = 0.0025; //annual interest rate of 0.25%
         double isLoyalInterest = 0.0035; //loyal customer interest rate of 0.35%
         if (isLoyal) {
-            return isLoyalInterest/Month.TOTALMONTHS;
+            return isLoyalInterest/Month.TOTALMONTHS * super.getBalance();
         }
         else {
-            return monthInterest/Month.TOTALMONTHS;
+            return monthInterest/Month.TOTALMONTHS * super.getBalance();
         }
     }
 
@@ -93,6 +93,5 @@ public class Savings extends Account{
     @Override
     public char getAccountType() {
         return 's';
-    }
-    
+    }    
 }
