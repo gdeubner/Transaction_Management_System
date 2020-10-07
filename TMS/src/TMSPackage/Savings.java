@@ -14,12 +14,12 @@ public class Savings extends Account{
 
     /**
      * Parameterized constructor that calls the constructor from the superclass
-     * and adds a fourth parameter, isLoyal, which is unique to a savings account.
-     * 
+     * and adds a fourth parameter, isLoyal, which is unique to a savings account.     
      * @param holder - name of person owning account
      * @param balance -  money amount in account
      * @param dateOpen -  date that account was opened
      * @param isLoyal - boolean that is true if customer is loyal, false otherwise
+     * 
      */
     public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
         super(holder, balance, dateOpen);
@@ -71,7 +71,7 @@ public class Savings extends Account{
         return "*Savings*" + super.toString() + getSpecialString();
     }    
     
-    /*
+    /**
      * This method checks if the customer is loyal, and if so, marks the acocunt as special savings.
      * 
      * @return special savings account if the holder is loyal, empty string otherwise
@@ -88,6 +88,7 @@ public class Savings extends Account{
     
     /**
      * returns 's' indicating this Account is a savings account
+     * 
      * @return returns the char 's'
      */
     @Override
