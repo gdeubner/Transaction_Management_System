@@ -3,88 +3,90 @@
  */
 package TMSPackage;
 
+import java.text.DecimalFormat;
+
 /**
- * This class defines a checking account and its unique features.
- * It implements the abstract methods from Account, adding the checking account
- * options along with its monthly fee and interest rate. * 
- * @author Sandeep Alankar, Graham Deubner
+ * This class represents a date, used to record when an account was opened.
+ * The format of the date is mm/dd/yyyy.
+ * It implements the comparable interface so that date objects may be compared,
+ * and an isVald method that decides if the date object contains a possible date.
+ * @author Graham Deubner, Sandeep Alankar
  */
-public class Checking extends Account {
-    private boolean directDeposit;
+public class Date implements Comparable<Date>{
 
+    private int year;
+    private int month;
+    private int day;
+    
     /**
-     * Parameterized constructor that calls the constructor from the superclass
-     * and adds a fourth parameter, directDeposit, which is unique to a checking account. 
-     * @param holder - name of person owning account
-     * @param balance -  money amount in account
-     * @param dateOpen -  date that account was opened
-     * @param directDeposit - true if account has direct deposit, false otherwise
-     */
-    public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
-        super(holder, balance, dateOpen);
-        this.directDeposit = directDeposit;
-    }
-
-    /**
-     * This method returns the monthly interest, which is the 
-     * annual interest rate divided by the total number of months in a year times the account balance.
+     * parameterized constructor method which assigns the year, month, and day to the passed values.
+     * @param year
+     * @param month
+     * @param day
      * 
-     * @return monthly interest amount
      */
-    @Override
-    public double monthlyInterest() {  
-        double interestRate = 0.0005;
-        return interestRate/Month.TOTALMONTHS * super.getBalance();
-    }
-
+    public Date(int month, int day, int year) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    } 
+    
     /**
-     * This method returns the monthly fee that the holder pays, which is dependent
-     * on directDeposit and the current account balance.
-     * 
-     * @return monthly fee
+     *Method which compares this Date object object to the Date Object passed as a parameter.
+     *Implements the Comparable interface.
+     *
+     *@return returns 0 if equivalent, 1 if this Date comes after the passed Date Object, 
+     *and -1 if this Date Object comes before the passed Date object.
      */
-    @Override
-    public double monthlyFee() {        
-        if (directDeposit || super.getBalance() >= 1500) {
+    public int compareTo(Date date) {//return 0, 1, or -1    when this bigger than param, => 1
+        if(date.year == this.year && date.month == this.month && date.day == this.day)
             return 0;
-        } 
-        else {
-            return 25;
-        }  
+        else if(this.year > date.year || this.month > date.month || this.day > date.day)
+            return 1;
+        return -1;
     }
-
+    
     /**
-     * toString method that calls toString method in superclass and adds account type and direct deposit
-     * if necessary.
-     * 
-     * @return String representation of account type, superclass toString, and direct deposit.
+     *Method returns the date held by this object in string format: mm/dd/yyyy
+     *
+     *@return - returns the string literal of the date
      */
-    @Override
     public String toString() {
-        return "*Checking*" + super.toString() + getSpecialString();
+        DecimalFormat df2char = new DecimalFormat("00");
+        DecimalFormat df4char = new DecimalFormat("00");
+        String str = df2char.format(month) + "/" + 
+                df2char.format(day) + "/" + df4char.format(year);
+        return str;
     }
 
     /**
-     * This method returns the necessary output string for a direct deposit account.
+     * method checks to see the objects day, month and year can be a real date.
      * 
-     * @return direct deposit account if directDeposit is true, empty string otherwise
+     * @return returns true if the date object contains a real date, false otherwise.
      */
-    @Override
-    public String getSpecialString() {
-        if (directDeposit) {
-            return "*direct deposit account*";
-        }
-        else {
-            return "";
-        }
-    }
+    public boolean isValid() {
+        int[] daysInEachMonth = {Month.JAN, Month.FEB, Month.MAR, Month.APR, Month.MAY, 
+                Month.JUN, Month.JUL, Month.AUG, Month.SEP, Month.OCT, Month.NOV, Month.DEC};
+        if(day < 1 || month < 1 || year < 1)
+            return false;
+        if(month>daysInEachMonth.length)
+            return false;
+        if (month == Month.FEBRUARY) {// deals with leap years
+            int febDays = Month.FEB;
+            if (year % Month.QUADRENNIAL == 0) {
+                if (year % Month.CENTENNIAL == 0) {
+                    if (year % Month.QUADRACENTENNIAL == 0) {
+                        febDays++; //it's a leap year
+                    }
 
-    /**
-     * returns 'c' indicating this Account is a Checking account
-     * @return returns the char 'c'
-     */
-    @Override
-    public char getAccountType() {
-        return 'c';
+                } else {
+                    febDays++;// it's a leap year
+                }
+            }
+            if (day > febDays)
+                return false;
+        } else if (day > daysInEachMonth[month-1])
+            return false;
+        return true;
     }    
 }
