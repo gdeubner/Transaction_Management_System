@@ -23,7 +23,6 @@ public class Month {
     public static final int TOTALMONTHS = 12;
     public static final int DAYS_ODD = 31;
     public static final int DAYS_EVEN = 30;
-    public static final int DAYS_FEB = 28;
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUADRACENTENNIAL = 400;

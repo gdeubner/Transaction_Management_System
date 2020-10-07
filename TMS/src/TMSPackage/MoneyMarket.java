@@ -64,10 +64,10 @@ public class MoneyMarket extends Account{
         return "*Money Market*" + super.toString() + getSpecialString();
     }
 
-    /*
+
+    /**
      * This method returns the number of withdrawals the holder has made on the account.
-     * 
-     * @return number of withdrawals followed by either "withdrawal" or "withdrawals" 
+     *@return number of withdrawals followed by either "withdrawal" or "withdrawals" 
      */
     @Override
     public String getSpecialString() {
@@ -89,9 +89,11 @@ public class MoneyMarket extends Account{
     }
     
     /**
-     * This method increments withdrawals
+     *@return 
      */
-    public void incrementWithdrawal() {
+    @Override
+    public void withdraw(double amount) {
+        super.withdraw(amount);
         withdrawals++;
     }
     
