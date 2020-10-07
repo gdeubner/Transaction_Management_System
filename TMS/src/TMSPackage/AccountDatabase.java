@@ -86,7 +86,6 @@ public class AccountDatabase {
         }
     }
 
-
     /**
      * This method removes the passed-in account from the database if it exists. 
      * The last item in the accounts array replaced the removed item with the index,
@@ -214,10 +213,9 @@ public class AccountDatabase {
             System.out.println("Database is empty!");
         else {
             sortByDateOpen();
-            System.out.println("--Printing statements by date opened--");
+            System.out.println("--Printing statements by date opened--\n");
             printHelper();
             System.out.println("--end of printing--\n");
-
         }
     }
 
@@ -230,7 +228,7 @@ public class AccountDatabase {
             System.out.println("Database is empty!");
         else {
             sortByLastName();
-            System.out.println("--Printing statements by last name--");
+            System.out.println("--Printing statements by last name--\n");
             printHelper();
             System.out.println("--end of printing--\n");
         }
@@ -250,7 +248,5 @@ public class AccountDatabase {
             }
             System.out.println("--end of listing--\n");
         }
-
     }
-
 }
