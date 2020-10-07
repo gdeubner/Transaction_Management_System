@@ -65,7 +65,7 @@ public class Checking extends Account {
         return "*Checking*" + super.toString() + getSpecialString();
     }
 
-    /*
+    /**
      * This method returns the necessary output string for a direct deposit account.
      * 
      * @return direct deposit account if directDeposit is true, empty string otherwise
