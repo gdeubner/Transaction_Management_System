@@ -27,21 +27,20 @@ public class Checking extends Account {
     }
 
     /**
-     * This method returns the monthly interest rate that the holder pays, which is the 
-     * annual interest rate divided by the total number of months in a year.
+     * This method returns the monthly interest, which is the 
+     * annual interest rate divided by the total number of months in a year times the account balance.
      * 
-     * @return monthly interest rate
+     * @return monthly interest amount
      */
     @Override
     public double monthlyInterest() {  
         double interestRate = 0.0005;
-        double monthInterest = interestRate/Month.TOTALMONTHS;
-        return monthInterest;
+        return interestRate/Month.TOTALMONTHS * super.getBalance();
     }
 
     /**
      * This method returns the monthly fee that the holder pays, which is dependent
-     * on directDeposit and the current account balance.
+     * on directDeposit and the current acocunt balance.
      * 
      * @return monthly fee
      */
@@ -80,7 +79,7 @@ public class Checking extends Account {
             return "";
         }
     }
-    
+
     /**
      * returns 'c' indicating this Account is a Checking account
      * @return returns the char 'c'
@@ -88,6 +87,5 @@ public class Checking extends Account {
     @Override
     public char getAccountType() {
         return 'c';
-    }
-    
+    }    
 }
