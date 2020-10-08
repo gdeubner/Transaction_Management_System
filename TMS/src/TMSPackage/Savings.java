@@ -15,10 +15,10 @@ public class Savings extends Account{
     /**
      * Parameterized constructor that calls the constructor from the superclass
      * and adds a fourth parameter, isLoyal, which is unique to a savings account.     
-     * @param holder - name of person owning account
-     * @param balance -  money amount in account
-     * @param dateOpen -  date that account was opened
-     * @param isLoyal - boolean that is true if customer is loyal, false otherwise
+     * @param holder name of person owning account
+     * @param balance  money amount in account
+     * @param dateOpen  date that account was opened
+     * @param isLoyal boolean that is true if customer is loyal, false otherwise
      * 
      */
     public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {

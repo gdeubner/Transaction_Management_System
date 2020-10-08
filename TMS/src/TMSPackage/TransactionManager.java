@@ -57,8 +57,8 @@ public class TransactionManager {
      * number of inputs. It takes in the input already read as a String[], creates another String[] with
      * the correct size to fit the requested number of inputs, and asks the user for input until the 
      * array is filled.
-     * @param input - user provided input from the command line
-     * @param requiredInputNum - the number of parameters required
+     * @param input user provided input from the command line
+     * @param requiredInputNum the number of parameters required
      * @return a String array containing the 3 required parameters forGroceryItem
      */
     private static String[] getInputs(String[] input, int requiredInputNum) {
@@ -77,9 +77,9 @@ public class TransactionManager {
     
     /**
      * This method creates a Date object from the given string.
-     * @param date - a String version of the date to be converted.
+     * @param date a String version of the date to be converted.
      * @return returns a Date object containing the converted date.
-     * @throws Exception "<date> is not a valid date." thrown if the date cannot be converted.
+     * @throws Exception "[date] is not a valid date." thrown if the date cannot be converted.
      */
     private static Date createDate(String date) throws Exception{
         int numDateValues = 3; //for the 3 values that makes up a date 
@@ -100,7 +100,7 @@ public class TransactionManager {
     
     /**
      * Converts a string value into a double.
-     * @param strBalance - takes a String containing the amount to be converted to a double
+     * @param strBalance takes a String containing the amount to be converted to a double
      * @return returns a double containing the amount
      * @throws Exception "Invalid amount entered." Thrown if given amount cannot be converted.
      */
@@ -134,7 +134,7 @@ public class TransactionManager {
      * a specified balance, a specified opening date. For checking 
      * and savings, an additional boolean is needed from the user to determine if
      * the account has direct deposit or is loyal, respectively. 
-     * @param input - a String[] containing user input
+     * @param input a String[] containing user input
      * @return returns the newly created account
      */
     private static Account createAccount(String[] input) {
@@ -176,7 +176,7 @@ public class TransactionManager {
      * This helper method creates a profile object from the given input and wraps it in a given account type.
      * The purpose of this method is to give other methods a way of passing some account information, without
      * having to make a whole new account.
-     * @param input - a String[] containing the input from the user
+     * @param input a String[] containing the input from the user
      * @return returns an Account object, either of type Checking, Savings, or MoneyMarket
      */
     private static Account createWrapperAccount(String[] input) {
@@ -202,7 +202,7 @@ public class TransactionManager {
      * and adds it to the database.
      *  On success, a success message is printed. On failure, a failure
      * message is printed. 
-     * @param input - a String[] of the users input
+     * @param input a String[] of the users input
      * 
      */
     private static void open(String[] input) {
@@ -235,7 +235,7 @@ public class TransactionManager {
      * This method will receive an array of user input and then removes a given account
      * from the database. On success, a success message is printed. On failure, a failure
      * message is printed. 
-     * @param input - a String[] of the users input
+     * @param input a String[] of the users input
      * 
      */
     private static void close(String[] input) {
@@ -251,7 +251,7 @@ public class TransactionManager {
      * This method will receive an array of user input and then deposit a given
      * amount into a given account. on success, a success message is printed. On 
      * failure due to the account not existing, an error message is printed.
-     * @param input - a String[] of the users input
+     * @param input a String[] of the users input
      * 
      */
     private static void deposit(String[] input) {
@@ -275,9 +275,9 @@ public class TransactionManager {
     /**
      * This method will receive an array of user input and withdraw a given sum 
      * from a given account. On success, the a success message is printed to standard output.
-     * If the account does not exist or there are insufficient funds for the withdrawl, 
+     * If the account does not exist or there are insufficient funds for the withdrawal, 
      * an error message is printed. 
-     * @param input - a String[] of the users input
+     * @param input a String[] of the users input
      * 
      */
     private static void withdraw(String[] input) {
@@ -303,10 +303,10 @@ public class TransactionManager {
     
     /**
      * This method will print the contents of the account, based on the input parameter.
-     * "PA" - will print a list of the accounts in the database
-     * "PD" - will print account statements ordered by the date they were opened.
-     * "PN" - will print account statements ordered by the last name of the account holder. 
-     * @param input - either "PA", "PD", or "PN", dictating the type of print that should occur. 
+     * "PA" will print a list of the accounts in the database
+     * "PD" will print account statements ordered by the date they were opened.
+     * "PN" will print account statements ordered by the last name of the account holder. 
+     * @param input either "PA", "PD", or "PN", dictating the type of print that should occur. 
      * 
      */
     private static void print(String[] input) {

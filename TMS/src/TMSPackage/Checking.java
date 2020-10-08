@@ -15,10 +15,10 @@ public class Checking extends Account {
     /**
      * Parameterized constructor that calls the constructor from the superclass
      * and adds a fourth parameter, directDeposit, which is unique to a checking account. 
-     * @param holder - name of person owning account
-     * @param balance -  money amount in account
-     * @param dateOpen -  date that account was opened
-     * @param directDeposit - true if account has direct deposit, false otherwise
+     * @param holder name of person owning account
+     * @param balance  money amount in account
+     * @param dateOpen  date that account was opened
+     * @param directDeposit true if account has direct deposit, false otherwise
      */
     public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
         super(holder, balance, dateOpen);

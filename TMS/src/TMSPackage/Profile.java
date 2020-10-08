@@ -16,8 +16,8 @@ public class Profile {
 
 	/**
 	 * Parameterized constructor which assigns fname and lname the names for the profile
-	 * @param fname - the first name for the profile
-	 * @param lname - the last name for the profile
+	 * @param fname the first name for the profile
+	 * @param lname the last name for the profile
 	 * 
 	 */
 	public Profile(String fname, String lname) {
@@ -56,7 +56,7 @@ public class Profile {
 	/**
 	 * This method checks if the first and last name of the holder is the same as the passed in Profile 
 	 * object.
-	 * @param prof
+	 * @param prof this parameter is contains the profile object that this profile object will be compaired to
 	 * @return true if two Profile first and last names are the same, false otherwise
 	 */ public boolean equals(Profile prof) {
 		 if(fname.equals(prof.getFName()) && lname.equals(prof.getLName()))

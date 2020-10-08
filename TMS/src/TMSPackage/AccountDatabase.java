@@ -1,6 +1,3 @@
-/**
- * 
- */
 package TMSPackage;
 import java.text.DecimalFormat;
 
@@ -28,9 +25,9 @@ public class AccountDatabase {
     /**
      * This method find a certain account and returns the index of the found account
      * upon success, searching based on account holder and account type. -1 returned
-     * on failure.     * 
-     * @param account - the account to be searched for in accounts.
-     * @return - returns index of account.
+     * on failure.
+     * @param account the account to be searched for in accounts.
+     * @return returns index of account.
      */
     private int find(Account account) {
         for (int i = 0; i < size; i++) {
@@ -45,7 +42,7 @@ public class AccountDatabase {
     
     /**
      * This method searches for and returns a given account.
-     * @param account - a account wrapper Account class, containing only the desired account name and type.
+     * @param account a account wrapper Account class, containing only the desired account name and type.
      * @return returns the sought after account. Returns null on failure.
      */
     private Account getAccount(Account account) {
@@ -74,7 +71,7 @@ public class AccountDatabase {
 
     /**
      * This method return false if account exists, adds account to database and grows if necessary.
-     * 
+     * @param account the account object to be added to the database
      * @return false if account is already in database, returns true if account can be added
      */
     public boolean add(Account account) {
@@ -96,8 +93,8 @@ public class AccountDatabase {
      * This method removes the passed-in account from the database if it exists. 
      * The last item in the accounts array replaced the removed item with the index,
      * and the index of the last item is set to null.      
-     * @param account - account to be removed.
-     * @return boolean - returns true on successful removal, returns false on failure
+     * @param account account to be removed.
+     * @return boolean returns true on successful removal, returns false on failure
      */
     public boolean remove(Account account) { 
         int accountPosition = find(account);
@@ -118,9 +115,9 @@ public class AccountDatabase {
 
     /**
      * This method deposits amount into the passed-in account, if it exists.     
-     * @param account - account to deposit in
-     * @param amount - amount that will be deposited
-     * @return boolean - true if deposit is successful, false on failure
+     * @param account account to deposit in
+     * @param amount amount that will be deposited
+     * @return boolean true if deposit is successful, false on failure
      */
     public boolean deposit(Account account, double amount) { 
         if (find(account) == -1) {
@@ -135,10 +132,9 @@ public class AccountDatabase {
 
     /**
      * This method withdraws amount from the passed-in account, if it exists.   
-     * @param account - account in which amount will be withdrawn
-     * @param amount - amount of withdrawal
-     * @return - returns 0 on successful withdrawal, 1 if balance is < amount, -1 if account
-     * does not exist
+     * @param account account in which amount will be withdrawn
+     * @param amount amount of withdrawal
+     * @return returns 0 on successful withdrawal, 1 if balance is less than amount, -1 if account does not exist
      */
     public int withdrawal(Account account, double amount) {
         if (find(account) == -1) {

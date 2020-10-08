@@ -18,7 +18,8 @@ class CheckingTest {
     Account superAccount;
 
     /**
-     * @throws java.lang.Exception
+     * This method is the setup for each test case for this class.
+     * @throws java.lang.Exception - this exception was auto-generated
      */
     @BeforeEach
     void setUp() throws Exception {
