@@ -90,9 +90,12 @@ public class MoneyMarket extends Account{
     }
 
     /**
-     * This method increments withdrawals
-     */
-    public void incrementWithdrawal() {
+     * This method withdraws the given amount from the account's balance.
+     * @param amount - the amount to be withdrawn.
+     * 
+     */@Override
+    public void withdraw(double amount) {
+        super.withdraw(amount);
         withdrawals++;
-    }    
+    }  
 }

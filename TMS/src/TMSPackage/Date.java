@@ -38,12 +38,26 @@ public class Date implements Comparable<Date>{
      *@return returns 0 if equivalent, 1 if this Date comes after the passed Date Object, 
      *and -1 if this Date Object comes before the passed Date object.
      */
-    public int compareTo(Date date) {//return 0, 1, or -1    when this bigger than param, => 1
-        if(date.year == this.year && date.month == this.month && date.day == this.day)
-            return 0;
-        else if(this.year > date.year || this.month > date.month || this.day > date.day)
+    public int compareTo(Date date) {
+        if (this.year > date.year)
             return 1;
-        return -1;
+        else if (this.year < date.year)
+            return -1;
+        else {
+            if (this.month > date.month)
+                return 1;
+            else if (this.month < date.month)
+                return -1;
+            else {
+                if (this.day > date.day)
+                    return 1;
+                else if (this.day < date.day)
+                    return -1;
+                else
+                    return 0;
+            }
+        }
+
     }
     
     /**

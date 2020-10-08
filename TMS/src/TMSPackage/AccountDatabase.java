@@ -15,6 +15,10 @@ public class AccountDatabase {
     private int size;
 
     
+    /**
+     * Constructor for AccountDatabase class. sets initialSize to 5 and size,
+     * which keeps track of the number of accounts in the DB.
+     */
     public AccountDatabase() {
         int initialDBSize = 5;
         size = 0;
@@ -146,8 +150,6 @@ public class AccountDatabase {
             }
             else {
                 targetAccount.withdraw(amount);
-                if(targetAccount instanceof MoneyMarket)
-                    ((MoneyMarket) targetAccount).incrementWithdrawal();
                 return 0; //withdrawal successful
             }
         }
@@ -193,12 +195,13 @@ public class AccountDatabase {
      */
     public void printHelper() {
         DecimalFormat decimalFormat;
-        decimalFormat = new DecimalFormat(",000.00");
+        decimalFormat = new DecimalFormat(",##0.00");
         for (int i = 0; i < size; i++) {              
             System.out.println(accounts[i].toString());
             System.out.println("-interest: $ " + decimalFormat.format(accounts[i].monthlyInterest()));
             System.out.println("-fee: $ " + decimalFormat.format(accounts[i].monthlyFee()));
             double newBalance = accounts[i].getBalance() + accounts[i].monthlyInterest() - accounts[i].monthlyFee();
+            accounts[i].setBalance(newBalance);
             System.out.println("-new balance: $ " + decimalFormat.format(newBalance) + "\n");
             accounts[i].setBalance(newBalance);
         }

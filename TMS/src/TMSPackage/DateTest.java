@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
+ * class for testing isValid in the date class.
  * @author Graham Deubner, Sandeep Alankar
  *
  */
