@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
+ * Class for testing the monthlyInterest and monhlyFee methods in the MoneyMarket class.
  * @author Graham Deubner, Sandeep Alankar
- *
  */
 class MoneyMarketTest {
     Account batAccount;
@@ -31,7 +31,7 @@ class MoneyMarketTest {
      */
     @Test
     void testMonthlyInterest() {
-        assertEquals(batAccount.monthlyInterest(), 5.416666666666666E-4);
+        assertEquals(batAccount.monthlyInterest(), 5416.666666666666);
     }
 
     /**

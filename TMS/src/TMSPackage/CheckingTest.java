@@ -10,7 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author gdeub
+ * Class for testing MonthlyInterest and MonthlyFee in the Checking class.
+ * @author Graham Deubner, Sandeep Alankar
  *
  */
 class CheckingTest {
@@ -26,13 +27,12 @@ class CheckingTest {
         superAccount = new Checking(p, 200000, d, false);
     }
 
-
     /**
      * Test method for {@link TMSPackage.Checking#monthlyInterest()}.
      */
     @Test
     void testMonthlyInterest() {
-        assertEquals(superAccount.monthlyInterest(), 4.1666666666666665E-5);
+        assertEquals(superAccount.monthlyInterest(), 8.333333333333334);
     }
 
     /**

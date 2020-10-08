@@ -80,7 +80,7 @@ public abstract class Account {
      * @return String representation of holder, balance, and dateOpen
      */@Override
     public String toString() {
-         DecimalFormat decimalFormat = new DecimalFormat(",000.00");
+         DecimalFormat decimalFormat = new DecimalFormat(",##0.00");
         return holder.toString() + "* $" + decimalFormat.format(balance) + "*" + dateOpen.toString();
     }    
 
@@ -123,5 +123,13 @@ public abstract class Account {
      */
     public void withdraw(double amount) {
         balance -= amount;
+    }
+    
+    /**
+     * this method allows the balance to be reset.
+     * @param newBalance the double the balance will be set to.
+     */
+    public void setBalance(double newBalance) {
+        balance = newBalance;
     }
 }
