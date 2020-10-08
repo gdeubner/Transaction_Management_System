@@ -47,6 +47,14 @@ public abstract class Account {
     public double getBalance() {
         return balance;
     }
+    
+    /**
+     * Setter method that updates balance with the passed in balance.
+     * @param balance, new balance of account
+     */
+    public void setBalance(double updatedBalance) {
+    	this.balance = updatedBalance;    	
+    }
 
     /**
      * Getter method that returns dateOpen.
