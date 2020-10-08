@@ -16,7 +16,8 @@ import org.junit.jupiter.api.Test;
 class MoneyMarketTest {
     Account batAccount;
     /**
-     * @throws java.lang.Exception
+     * This method does the setup necessary for the tests in this class.
+     * @throws java.lang.Exception - this exception was auto-generated
      */
     @BeforeEach
     void setUp() throws Exception {
@@ -27,7 +28,7 @@ class MoneyMarketTest {
 
 
     /**
-     * Test method for {@link TMSPackage.MoneyMarket#monthlyInterest()}.
+     * Test method for {@link TMSPackage.MoneyMarket#monthlyInterest()} testing monthlInterest().
      */
     @Test
     void testMonthlyInterest() {
@@ -35,7 +36,7 @@ class MoneyMarketTest {
     }
 
     /**
-     * Test method for {@link TMSPackage.MoneyMarket#monthlyFee()}.
+     * Test method for {@link TMSPackage.MoneyMarket#monthlyFee()} testing monthlyFee().
      */
     @Test
     void testMonthlyFee() {

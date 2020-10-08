@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class DateTest {
    
     /**
-     * Test method for {@link TMSPackage.Date#isValid()}.
+     * Test method for {@link TMSPackage.Date#isValid()} testing isValid().
      */
     @Test
     void testIsValid() {

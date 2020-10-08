@@ -19,9 +19,9 @@ public abstract class Account {
     /**
      * Parameterized constructor that initializes instance variables, allows 
      * use in other classes.
-     * @param holder
-     * @param balance, money amount in account
-     * @param dateOpen
+     * @param holder an object containing the first and last name of the account holder
+     * @param balance the balance of the new account
+     * @param dateOpen an object containing the date the new account was opened. 
      * 
      */
     public Account (Profile holder, double balance, Date dateOpen) {
@@ -67,7 +67,7 @@ public abstract class Account {
 
     /**
      * Decreases the balance by amount. 
-     * @param amount 
+     * @param amount an amount to be withdrawn from this account
      */
     public void debit(double amount) { 
         balance -= amount;
@@ -75,7 +75,7 @@ public abstract class Account {
 
     /**
      * Increases the balance by amount. 
-     * @param amount
+     * @param amount the amount by which the balance will be increased;
      */
     public void credit(double amount) { 
         balance += amount;
@@ -126,7 +126,7 @@ public abstract class Account {
     
     /**
      * This method withdraws the given amount from the account's balance.
-     * @param amount - the amount to be withdrawn.
+     * @param amount the amount to be withdrawn.
      * 
      */
     public void withdraw(double amount) {

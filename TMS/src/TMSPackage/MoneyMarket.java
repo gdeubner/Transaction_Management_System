@@ -15,9 +15,9 @@ public class MoneyMarket extends Account{
     /**
      * Parameterized constructor that calls the constructor from the superclass
      * and adds a fourth parameter, withdrawals, which is unique to a MoneyMarket account.    
-     * @param holder - name of person owning account
-     * @param balance -  money amount in account
-     * @param dateOpen -  date that account was opened
+     * @param holder name of person owning account
+     * @param balance  money amount in account
+     * @param dateOpen  date that account was opened
      * 
      */
     public MoneyMarket(Profile holder, double balance, Date dateOpen) {
@@ -91,7 +91,7 @@ public class MoneyMarket extends Account{
 
     /**
      * This method withdraws the given amount from the account's balance.
-     * @param amount - the amount to be withdrawn.
+     * @param amount the amount to be withdrawn.
      * 
      */@Override
     public void withdraw(double amount) {

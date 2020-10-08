@@ -20,9 +20,9 @@ public class Date implements Comparable<Date>{
     
     /**
      * parameterized constructor method which assigns the year, month, and day to the passed values.
-     * @param year
-     * @param month
-     * @param day
+     * @param year the year of the new date object
+     * @param month the month of the new date object
+     * @param day the day of the new year object
      * 
      */
     public Date(int month, int day, int year) {
@@ -34,7 +34,7 @@ public class Date implements Comparable<Date>{
     /**
      *Method which compares this Date object object to the Date Object passed as a parameter.
      *Implements the Comparable interface.
-     *
+     *@param date the date object which this date object will be compared to
      *@return returns 0 if equivalent, 1 if this Date comes after the passed Date Object, 
      *and -1 if this Date Object comes before the passed Date object.
      */
@@ -63,7 +63,7 @@ public class Date implements Comparable<Date>{
     /**
      *Method returns the date held by this object in string format: mm/dd/yyyy
      *
-     *@return - returns the string literal of the date
+     *@return returns the string literal of the date
      */
     public String toString() {
         DecimalFormat df2char = new DecimalFormat("00");
