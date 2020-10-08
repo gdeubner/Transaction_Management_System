@@ -86,8 +86,7 @@ public class AccountDatabase {
             return true;
         }
     }
-
-
+    
     /**
      * This method removes the passed-in account from the database if it exists. 
      * The last item in the accounts array replaced the removed item with the index,
@@ -201,6 +200,7 @@ public class AccountDatabase {
             System.out.println("-fee: $ " + decimalFormat.format(accounts[i].monthlyFee()));
             double newBalance = accounts[i].getBalance() + accounts[i].monthlyInterest() - accounts[i].monthlyFee();
             System.out.println("-new balance: $ " + decimalFormat.format(newBalance) + "\n");
+            accounts[i].setBalance(newBalance);
         }
     }
 
